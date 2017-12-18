@@ -216,6 +216,10 @@ func setTUN(fd syscall.Handle, network string) error {
 
 // openDev find and open an interface.
 func openDev(config Config) (ifce *Interface, err error) {
+	if config.PlatformSpecificParams.ComponentID == "" {
+		err = fmt.Errorf("Empty ComponentID in PlatformSpecificParams config")
+		return nil, err
+	}
 	// find the device in registry.
 	deviceid, err := getdeviceid(config.PlatformSpecificParams.ComponentID)
 	if err != nil {
