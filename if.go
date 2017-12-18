@@ -39,19 +39,19 @@ type Config struct {
 	PlatformSpecificParams
 }
 
-func defaultConfig() Config {
+func DefaultConfig() Config {
 	return Config{
 		DeviceType:             TUN,
 		PlatformSpecificParams: defaultPlatformSpecificParams(),
 	}
 }
 
-var zeroConfig Config
+var ZeroConfig Config
 
 // New creates a new TUN/TAP interface using config.
 func New(config Config) (ifce *Interface, err error) {
-	if zeroConfig == config {
-		config = defaultConfig()
+	if ZeroConfig == config {
+		config = DefaultConfig()
 	}
 	switch config.DeviceType {
 	case TUN:
